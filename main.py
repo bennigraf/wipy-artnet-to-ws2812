@@ -45,7 +45,7 @@ def main():
     while True:
         # initrgbdata = initrgbdata[1:] + initrgbdata[0:1]
         # print(initrgbdata)
-        time.sleep_ms(25)
+        # time.sleep_ms(25)
         chain.show(initrgbdata)
 
         # print("waiting to receive message")
@@ -70,9 +70,10 @@ def main():
 
         if opcode == 0x5000:
             data_length = ustruct.unpack('>H', data[16:18])[0]
+            # print("data length: ", data_length)
             rgbdata = []
             ndx = 0
-            while ndx <= data_length and ndx < CHAIN_LEN:
+            while ndx < data_length and ndx < CHAIN_LEN * 3:
                 rgb = [0, 0, 0]
                 i = 0
                 while ndx+i < data_length and i < 3:
